@@ -1,14 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { ShoppingCart, User } from "lucide-react";
+import LogoutButton from "../../../features/auth/components/LogoutButton";
 
 function UserNavbar() {
   return (
     <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <NavLink
-          to="/"
-          className="text-2xl font-bold text-indigo-600"
-        >
+        <NavLink to="/" className="text-2xl font-bold text-indigo-600">
           SaleKart
         </NavLink>
 
@@ -19,22 +17,18 @@ function UserNavbar() {
 
           <NavLink to="/orders">Orders</NavLink>
 
-          <NavLink
-            to="/cart"
-            className="flex items-center gap-2"
-          >
+          <NavLink to="/cart" className="flex items-center gap-2">
             <ShoppingCart size={20} />
             Cart
           </NavLink>
 
-          <NavLink
-            to="/profile"
-            className="flex items-center gap-2"
-          >
+          <NavLink to="/profile" className="flex items-center gap-2">
             <User size={20} />
             Profile
           </NavLink>
         </nav>
+
+        <LogoutButton />
       </div>
     </header>
   );

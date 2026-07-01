@@ -19,6 +19,7 @@ import UserLayout from "../layouts/UserLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import UserRoute from "./UserRoute";
 import ProductPage from "../../features/admin/product/pages/ProductPage";
+import ProfilePage from "../../features/profile/pages/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
                 path: "/",
                 element: <HomePage />,
               },
+              {
+                path: "/profile",
+                element: <ProfilePage />,
+              },
             ],
           },
         ],
@@ -73,9 +78,9 @@ const router = createBrowserRouter([
                 element: <CategoryPage />,
               },
               {
-                path:"/admin/products",
-                element:<ProductPage/>
-              }
+                path: "/admin/products",
+                element: <ProductPage />,
+              },
             ],
           },
         ],

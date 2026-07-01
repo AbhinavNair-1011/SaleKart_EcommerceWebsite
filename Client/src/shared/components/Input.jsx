@@ -4,6 +4,8 @@ function Input({
   type = "text",
   register,
   error,
+  className,
+
   ...props
 }) {
   return (
@@ -20,7 +22,7 @@ function Input({
         type={type}
         {...register}
         {...props}
-        className="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500"
+        className={`rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500 ${className}`}
       />
 
       {error && (

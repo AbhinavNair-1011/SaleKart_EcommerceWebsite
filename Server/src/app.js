@@ -10,6 +10,7 @@ const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
 const categoryRoutes = require("./routes/category.route");
 const productRoutes = require("./routes/product.route");
+const addressRoutes = require("./routes/address.route");
 
 const globalErrorHandler = require("./middlewares/globalErrorHandler");
 const notFoundHandler = require("./middlewares/notFoundHandler");
@@ -45,6 +46,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
+app.use("/addresses", addressRoutes);
 
 app.use(notFoundHandler);
 

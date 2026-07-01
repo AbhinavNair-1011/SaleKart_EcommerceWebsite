@@ -1,9 +1,19 @@
-
-
 const User = require("./user.model");
 const Session = require("./session.model");
 const Category = require("./category.model");
 const Product = require("./product.model");
+
+const Address = require("./address.model");
+
+User.hasMany(Address, {
+  foreignKey: "userId",
+  onDelete: "CASCADE",
+});
+
+Address.belongsTo(User, {
+  foreignKey: "userId",
+});
+
 
 User.hasMany(Session, {
   foreignKey: "userId",
@@ -13,6 +23,7 @@ User.hasMany(Session, {
 Session.belongsTo(User, {
   foreignKey: "userId",
 });
+
 
 Category.hasMany(Product, {
   foreignKey: "categoryId",
@@ -28,4 +39,5 @@ module.exports = {
   Session,
   Category,
   Product,
+  Address,
 };

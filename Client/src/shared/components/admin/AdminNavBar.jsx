@@ -1,4 +1,5 @@
 import { LogOut } from "lucide-react";
+import LogoutButton from "../../../features/auth/components/LogoutButton";
 
 function AdminNavbar() {
   return (
@@ -7,10 +8,7 @@ function AdminNavbar() {
         Admin Dashboard
       </h1>
 
-      <button className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white transition hover:bg-red-600">
-        <LogOut size={18} />
-        Logout
-      </button>
+    <LogoutButton/>
     </header>
   );
 }
