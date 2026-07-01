@@ -1,28 +1,28 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 import Loader from "../../shared/components/Loader";
-
 import { useMe } from "../../features/auth/hooks/useMe";
 
-function PublicRoute() {
+function UserRoute() {
   const {
     data: user,
     isLoading,
+    isError,
   } = useMe();
 
   if (isLoading) {
     return <Loader />;
   }
 
-  if (user) {
-    if (user.role === "admin") {
-      return <Navigate to="/admin" replace />;
-    }
+  if (isError || !user) {
+    return <Navigate to="/login" replace />;
+  }
 
-    return <Navigate to="/" replace />;
+  if (user.role === "admin") {
+    return <Navigate to="/admin" replace />;
   }
 
   return <Outlet />;
 }
 
-export default PublicRoute;
+export default UserRoute;

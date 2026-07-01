@@ -8,7 +8,8 @@ require("./models")
 
 const authRoutes = require("./routes/auth.route");
 const userRoutes = require("./routes/user.route");
-
+const categoryRoutes = require("./routes/category.route");
+const productRoutes = require("./routes/product.route");
 
 const globalErrorHandler = require("./middlewares/globalErrorHandler");
 const notFoundHandler = require("./middlewares/notFoundHandler");
@@ -42,8 +43,8 @@ app.get("/api/check", (req, res) => {
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-
-
+app.use("/categories", categoryRoutes);
+app.use("/products", productRoutes);
 
 app.use(notFoundHandler);
 

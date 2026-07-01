@@ -25,14 +25,16 @@ function LoginForm() {
 
   function onSubmit(formData) {
     mutate(formData, {
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({
-          queryKey: ["me"],
-        });
+      onSuccess: (user) => {
+        queryClient.setQueryData(["me"], user);
 
         toast.success("Login successful.");
 
-        // navigate("/doasboard");
+        if (user.role === "admin") {
+          navigate("/admin", { replace: true });
+        } else {
+          navigate("/", { replace: true });
+        }
       },
 
       onError: (error) => {
