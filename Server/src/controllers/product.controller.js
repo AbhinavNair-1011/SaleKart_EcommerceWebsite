@@ -1,5 +1,6 @@
 const { Product, Category } = require("../models");
 const AppError = require("../utils/AppError");
+const { Op } = require("sequelize");
 
 async function createProduct(req, res) {
   const { name, description, price, stock, imageUrl, categoryId } = req.body;
@@ -29,20 +30,63 @@ async function createProduct(req, res) {
 }
 
 async function getAllProducts(req, res) {
-  const products = await Product.findAll({
-    include: {
-      model: Category,
-      attributes: ["id", "name"],
-    },
+  const { search, categoryId, page = 1, limit = 12 } = req.query;
 
-    order: [["createdAt", "DESC"]],
-  });
+  const where = {};
 
+  if (search) {
+    where.name = {
+      [Op.like]: `%${search}%`,
+    };
+  }
+
+  if (categoryId) {
+    where.categoryId = categoryId;
+  }
+
+  const currentPage = Number(page);
+
+  const pageSize = Number(limit);
+
+  const offset = (currentPage - 1) * pageSize;
+
+  const { rows: products, count: totalProducts } =
+    await Product.findAndCountAll({
+      where,
+
+      include: {
+        model: Category,
+        attributes: ["id", "name"],
+      },
+
+      order: [["createdAt", "DESC"]],
+
+      limit: pageSize,
+
+      offset,
+    });
+
+    let totalPages= Math.ceil(totalProducts / pageSize)
+    if(totalPages===0){
+        totalPages=1
+    }
   return res.status(200).json({
     success: true,
+
     data: {
       products,
+
+      pagination: {
+        page: currentPage,
+
+        limit: pageSize,
+
+        totalProducts,
+
+        totalPages
+      },
     },
+
     error: null,
   });
 }

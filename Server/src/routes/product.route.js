@@ -11,6 +11,7 @@ const { uuidParamSchema } = require("../validators/uuid.validation");
 const {
   createProductSchema,
   updateProductSchema,
+  getProductsQuerySchema,
 } = require("../validators/product.validation");
 
 const {
@@ -29,16 +30,24 @@ router.post(
   createProduct,
 );
 
-router.get("/", getAllProducts);
+router.get("/", validate(getProductsQuerySchema, "query"), getAllProducts);
 
 router.get("/:id", validate(uuidParamSchema, "params"), getProductById);
 
-router.patch("/:id",authMiddleware,authorize("admin"), validate(uuidParamSchema, "params"),
+router.patch(
+  "/:id",
+  authMiddleware,
+  authorize("admin"),
+  validate(uuidParamSchema, "params"),
   validate(updateProductSchema),
   updateProduct,
 );
 
-router.delete("/:id",authMiddleware, authorize("admin"),validate(uuidParamSchema, "params"),
+router.delete(
+  "/:id",
+  authMiddleware,
+  authorize("admin"),
+  validate(uuidParamSchema, "params"),
   deleteProduct,
 );
 

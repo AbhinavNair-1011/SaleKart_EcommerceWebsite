@@ -16,7 +16,7 @@ import useDeleteProduct from "../hooks/useDeleteProduct";
 
 import useCategories from "../../categories/hooks/useCategories";
 
-function ProductPage() {
+function AdminProductPage() {
   const queryClient = useQueryClient();
 
   const [open, setOpen] = useState(false);
@@ -135,4 +135,4 @@ function ProductPage() {
   );
 }
 
-export default ProductPage;
+export default AdminProductPage;

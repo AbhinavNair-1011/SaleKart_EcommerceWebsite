@@ -11,6 +11,7 @@ const userRoutes = require("./routes/user.route");
 const categoryRoutes = require("./routes/category.route");
 const productRoutes = require("./routes/product.route");
 const addressRoutes = require("./routes/address.route");
+const cartRoutes = require("./routes/cart.route");
 
 const globalErrorHandler = require("./middlewares/globalErrorHandler");
 const notFoundHandler = require("./middlewares/notFoundHandler");
@@ -47,6 +48,7 @@ app.use("/users", userRoutes);
 app.use("/categories", categoryRoutes);
 app.use("/products", productRoutes);
 app.use("/addresses", addressRoutes);
+app.use("/cart", cartRoutes);
 
 app.use(notFoundHandler);
 

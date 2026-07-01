@@ -18,8 +18,10 @@ import NotFoundPage from "../../pages/NotFountPage";
 import UserLayout from "../layouts/UserLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import UserRoute from "./UserRoute";
-import ProductPage from "../../features/admin/product/pages/ProductPage";
 import ProfilePage from "../../features/profile/pages/ProfilePage";
+import ProductPage from "../../features/products/pages/ProductPage";
+import CartPage from "../../features/cart/pages/CartPage";
+import AdminProductPage from "../../features/admin/product/pages/AdminProductPage";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
                 path: "/profile",
                 element: <ProfilePage />,
               },
+              {
+                path: "/products",
+                element: <ProductPage />,
+              },
+               {
+                path: "/cart",
+                element: <CartPage />,
+              },
             ],
           },
         ],
@@ -79,8 +89,9 @@ const router = createBrowserRouter([
               },
               {
                 path: "/admin/products",
-                element: <ProductPage />,
+                element: <AdminProductPage />,
               },
+             
             ],
           },
         ],
