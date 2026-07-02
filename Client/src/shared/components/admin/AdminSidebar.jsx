@@ -5,6 +5,7 @@ import {
   Boxes,
   Package,
   ShoppingCart,
+  User
 } from "lucide-react";
 
 const links = [
@@ -28,6 +29,11 @@ const links = [
     path: "/admin/orders",
     icon: ShoppingCart,
   },
+  {
+    name:"Users",
+    path:"/admin/users",
+    icon:User
+  }
 ];
 
 function AdminSidebar() {

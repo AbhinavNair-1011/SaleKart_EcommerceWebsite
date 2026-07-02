@@ -17,6 +17,7 @@
     "morgan": "^1.11.0",
     "multer": "^2.2.0",
     "mysql2": "^3.22.5",
+    "razorpay": "^2.9.6",
     "redis": "^6.0.0",
     "sequelize": "^6.37.8",
     "socket.io": "^4.8.3",

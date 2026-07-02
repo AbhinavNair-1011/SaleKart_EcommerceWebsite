@@ -60,7 +60,32 @@ async function updateMyProfile(req, res) {
     error: null,
   });
 }
+
+async function getAllUsers(req, res) {
+  const users = await User.findAll({
+    attributes: [
+      "id",
+      "name",
+      "userName",
+      "email",
+      "phone",
+      "role",
+      "createdAt",
+    ],
+
+    order: [["createdAt", "DESC"]],
+  });
+
+  return res.status(200).json({
+    success: true,
+    data: {
+      users,
+    },
+    error: null,
+  });
+}
 module.exports = {
   getMyProfile,
   updateMyProfile,
+  getAllUsers
 };

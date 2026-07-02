@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db");
 
-const User = sequelize.define(
-  "User",
+const OrderItem = sequelize.define(
+  "OrderItem",
   {
     id: {
       type: DataTypes.UUID,
@@ -10,44 +10,40 @@ const User = sequelize.define(
       primaryKey: true,
     },
 
-    userName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-
-    password: {
-      type: DataTypes.STRING,
+    orderId: {
+      type: DataTypes.UUID,
       allowNull: false,
     },
 
-    name: {
+    productId: {
+      type: DataTypes.UUID,
+      allowNull: false,
+    },
+
+    productName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
 
-    phone: {
+    productImage: {
       type: DataTypes.STRING,
-      allowNull: true,
-      unique: true,
+      allowNull: false,
     },
 
-    role: {
-      type: DataTypes.ENUM("user", "admin"),
+    quantity: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: "user",
+    },
+
+    price: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
     },
   },
   {
-    tableName: "users",
+    tableName: "order_items",
     timestamps: true,
-  },
+  }
 );
 
-module.exports = User;
+module.exports = OrderItem;
