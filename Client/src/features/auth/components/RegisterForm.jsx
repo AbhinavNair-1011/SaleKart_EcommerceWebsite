@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
@@ -25,25 +25,24 @@ function RegisterForm() {
 
   function onSubmit(formData) {
     mutate(formData, {
-      onSuccess: () => {
-        toast.success("Registration successful.");
-        navigate("/login");
+      onSuccess(data) {
+        sessionStorage.setItem("registrationEmail", JSON.stringify(data.email));
+
+        toast.success("OTP sent to your email.");
+
+        navigate(`/verify-email`);
       },
 
       onError: (error) => {
         toast.error(
-          error.response?.data?.error?.message ||
-            "Something went wrong."
+          error.response?.data?.error?.message || "Something went wrong.",
         );
       },
     });
   }
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex flex-col">
       <Input
         id="name"
         label="Full Name"
@@ -82,13 +81,8 @@ function RegisterForm() {
         error={errors.dob}
       />
 
-      <Button
-        type="submit"
-        disabled={isPending}
-      >
-        {isPending
-          ? "Registering..."
-          : "Register"}
+      <Button type="submit" disabled={isPending}>
+        {isPending ? "Registering..." : "Register"}
       </Button>
     </form>
   );

@@ -7,6 +7,7 @@ const Address = require("./address.model");
 const Cart = require("./cart.model");
 const Order = require("./order.model");
 const OrderItem = require("./orderItem.model");
+const Verification = require("./verification.model");
 
 User.hasMany(Address, {
   foreignKey: "userId",
@@ -86,6 +87,15 @@ Product.hasMany(OrderItem, {
 OrderItem.belongsTo(Product, {
   foreignKey: "productId",
 });
+
+User.hasMany(Verification, {
+  foreignKey: "userId",
+  onDelete: "CASCADE",
+});
+
+Verification.belongsTo(User, {
+  foreignKey: "userId",
+});
 module.exports = {
   User,
   Session,
@@ -94,5 +104,6 @@ module.exports = {
   Address,
   Cart,
   Order,
-  OrderItem
+  OrderItem,
+  Verification
 };

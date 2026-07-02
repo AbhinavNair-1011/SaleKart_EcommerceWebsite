@@ -13,7 +13,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import AdminRoute from "./AdminRoute";
 
-import UserLayout from "../layouts/UserLayout"
+import UserLayout from "../layouts/UserLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import UserRoute from "./UserRoute";
 
@@ -32,6 +32,9 @@ import AdminDashboardPage from "../../features/admin/dashboard/pages/AdminDashbo
 import UsersPage from "../../features/admin/users/pages/UsersPage";
 
 import NotFoundPage from "../../pages/NotFountPage";
+import VerifyEmailPage from "../../features/auth/pages/VerifyEmailPage";
+import ForgotPasswordPage from "../../features/auth/pages/ForgotPasswordPage";
+import ResetPasswordPage from "../../features/auth/pages/ResetPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +50,19 @@ const router = createBrowserRouter([
           {
             path: "/register",
             element: <RegisterPage />,
+          },
+          {
+            path: "/verify-email",
+            element: <VerifyEmailPage />,
+          },
+          {
+            path: "/forgot-password",
+            element: <ForgotPasswordPage/>,
+          },
+
+          {
+            path: "/reset-password",
+            element: <ResetPasswordPage/>,
           },
         ],
       },
@@ -105,7 +121,7 @@ const router = createBrowserRouter([
                 path: "/admin",
                 element: <AdminDashboardPage />,
               },
-              
+
               {
                 path: "/admin/categories",
                 element: <CategoryPage />,
@@ -116,9 +132,9 @@ const router = createBrowserRouter([
               },
               {
                 path: "/admin/orders",
-                element: <AdminOrdersPage/>,
+                element: <AdminOrdersPage />,
               },
-               {
+              {
                 path: "/admin/users",
                 element: <UsersPage />,
               },
@@ -126,7 +142,6 @@ const router = createBrowserRouter([
                 path: "/admin/orders/:id",
                 element: <AdminOrderDetailsPage />,
               },
-              
             ],
           },
         ],

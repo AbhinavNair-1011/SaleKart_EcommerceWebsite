@@ -9,10 +9,10 @@ function Input({
   ...props
 }) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className="font-medium"
+        className="font-medium "
       >
         {label}
       </label>

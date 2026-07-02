@@ -46,7 +46,10 @@ function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4 p-1 flex flex-col"
+    >
       <Input
         id="email"
         label="Email"
@@ -62,8 +65,16 @@ function LoginForm() {
         register={register("password")}
         error={errors.password}
       />
-
-      <Button type="submit" disabled={isPending}>
+      <p className="text-right">
+        <button
+          type="button"
+          onClick={() => navigate("/forgot-password")}
+          className="text-sm text-white underline"
+        >
+          Forgot Password?
+        </button>
+      </p>
+      <Button type="submit" disabled={isPending} className={""}>
         {isPending ? "Logging in..." : "Login"}
       </Button>
     </form>

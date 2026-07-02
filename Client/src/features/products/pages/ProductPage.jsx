@@ -79,8 +79,8 @@ function ProductPage() {
       </select>
       {products.length === 0 ? (
         <EmptyState
-          title={`No Products by the name of ${debouncedSearch}`}
-          description={` Kindly search for the desired product again with the correct name`}
+          title={`No Products! Stay tuned for new products.`}
+          description={`We Appreciate your patience`}
         />
       ) : (
         <ProductList products={products} />

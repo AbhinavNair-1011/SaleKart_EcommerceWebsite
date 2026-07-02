@@ -35,24 +35,34 @@ function ProductCard({ product }) {
   }
 
   return (
-    <div className="rounded-xl border bg-white p-4 shadow-sm">
+    <div className="flex h-full flex-col rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
       <img
         src={product.imageUrl}
         alt={product.name}
-        className="mb-4 h-56 w-full rounded-lg object-cover"
+        className="mb-3 h-44 w-full rounded-lg object-cover"
       />
 
-      <h2 className="text-lg font-semibold">{product.name}</h2>
+      <span className="mb-2 w-fit rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700">
+        {product.Category.name}
+      </span>
 
-      <p className="mt-2 line-clamp-2 text-sm text-gray-500">
+      <h2 className="line-clamp-2 text-lg font-semibold">{product.name}</h2>
+
+      <p className="mt-2 line-clamp-2 flex-1 text-sm text-gray-500">
         {product.description}
       </p>
 
-      <p className="mt-3 text-xl font-bold">₹{product.price}</p>
+      <div className="mt-4 flex items-center justify-between">
+        <p className="text-2xl font-bold text-blue-600">₹{product.price}</p>
 
-      <p className="mb-4 mt-1 text-sm text-gray-500">{product.Category.name}</p>
+        <p className="text-sm text-gray-500">Stock: {product.stock}</p>
+      </div>
 
-      <Button className="w-full" disabled={isPending} onClick={handleAddToCart}>
+      <Button
+        className="mt-4 w-full"
+        disabled={isPending}
+        onClick={handleAddToCart}
+      >
         {isPending ? "Adding..." : "Add to Cart"}
       </Button>
     </div>

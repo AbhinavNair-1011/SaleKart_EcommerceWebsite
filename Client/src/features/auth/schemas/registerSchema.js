@@ -19,3 +19,7 @@ export const registerSchema = z.object({
 
   dob: z.string(),
 });
+
+export const changeVerificationEmailSchema = z.object({
+  newEmail: z.email("Invalid email"),
+});
