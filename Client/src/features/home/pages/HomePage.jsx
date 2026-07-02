@@ -30,68 +30,117 @@ function HomePage() {
   const categories = categoryData?.data?.categories ?? [];
 
   return (
-    <div className="space-y-10">
-      <div className="bg-mist-200 p-3">
-        <h1 className="text-3xl font-bold text-center pt-5 ">Welcome {userName} </h1>
+   <div className="mx-auto max-w-[90%] space-y-12 py-8">
+  <section className="overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 px-10 py-14 text-white">
+    <div className="max-w-2xl">
+      <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-slate-300">
+        Welcome Back
+      </p>
 
-        <p className="mt-2 text-gray-500 text-center">
-          Discover great products and enjoy shopping.
-        </p>
-      </div>
+      <h1 className="text-4xl font-bold leading-tight">
+        Hello, {userName}
+      </h1>
 
-      <div>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">Categories</h2>
+      <p className="mt-4 text-lg text-slate-300">
+        Discover premium products, exclusive deals, and everything you need in
+        one place.
+      </p>
 
-          <Link to="/products">
-            <Button>Browse Products</Button>
-          </Link>
-        </div>
+      <div className="mt-8 flex gap-4">
+        <Link to="/products">
+          <Button className="bg-gray-700 text-black ">
+            Shop Now
+          </Button>
+        </Link>
 
-        <div className="flex flex-wrap gap-3">
-          {categories.map((category) => (
-            <span
-              key={category.id}
-              className="rounded-full border border-gray-300 bg-white px-4 py-2 text-sm font-medium shadow-sm"
-            >
-              {category.name}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">Latest Products</h2>
-
-          <Link to="/products">
-            <Button>View All</Button>
-          </Link>
-        </div>
-
-        <ProductList products={products} />
-      </div>
-
-      <div>
-        <h2 className="mb-4 text-2xl font-semibold text-center p-2">Quick Actions</h2>
-
-        <div className="flex justify-center gap-5 flex-1 p-2">
-          <Link to="/cart">
-            <Button className="w-full bg-gray-600 ">Cart</Button>
-          </Link>
-
-          <Link to="/orders">
-            <Button className="w-full bg-gray-600">My Orders</Button>
-          </Link>
-
-      
-
-          <Link to="/profile">
-            <Button className="w-full bg-gray-600">Profile</Button>
-          </Link>
-        </div>
+        <Link to="/orders">
+          <Button className="bg-slate-700 hover:bg-slate-600">
+            My Orders
+          </Button>
+        </Link>
       </div>
     </div>
+  </section>
+    <section>
+    <div className="mb-6">
+      <h2 className="text-2xl font-bold text-gray-900">
+        Quick Actions
+      </h2>
+
+      <p className="mt-1 text-gray-500">
+        Access your shopping essentials.
+      </p>
+    </div>
+
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <Link
+        to="/cart"
+        className="rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md"
+      >
+        <h3 className="text-lg font-semibold text-gray-900">
+          Shopping Cart
+        </h3>
+
+        <p className="mt-2 text-sm text-gray-500">
+          Review products you've added before checkout.
+        </p>
+      </Link>
+
+      <Link
+        to="/orders"
+        className="rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md"
+      >
+        <h3 className="text-lg font-semibold text-gray-900">
+          My Orders
+        </h3>
+
+        <p className="mt-2 text-sm text-gray-500">
+          Track orders and view your purchase history.
+        </p>
+      </Link>
+
+      <Link
+        to="/profile"
+        className="rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md"
+      >
+        <h3 className="text-lg font-semibold text-gray-900">
+          Profile
+        </h3>
+
+        <p className="mt-2 text-sm text-gray-500">
+          Manage your account information and addresses.
+        </p>
+      </Link>
+    </div>
+  </section>
+
+ 
+
+<section className="mt-12 overflow-hidden rounded-2xl bg-white p-8 shadow-sm">
+  <div className="mb-8 flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+    <div>
+      <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+        New Arrivals
+      </span>
+
+
+      <p className="mt-2 max-w-2xl text-gray-500">
+        Explore the newest additions to our collection. Carefully selected
+        products with premium quality and great value.
+      </p>
+    </div>
+
+    <Link to="/products">
+      <Button className="rounded-lg bg-slate-900 px-6 py-2.5 hover:bg-slate-800">
+        View All Products →
+      </Button>
+    </Link>
+  </div>
+
+  <ProductList products={products} />
+</section>
+
+</div>
   );
 }
 

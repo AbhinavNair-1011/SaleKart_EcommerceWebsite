@@ -89,6 +89,7 @@ function AddressPage() {
         <h1 className="text-3xl font-bold">My Addresses</h1>
 
         <Button
+        className="bg-slate-600 hover:bg-slate-700"
           onClick={() => {
             setEditingAddress(null);
             setOpen(true);

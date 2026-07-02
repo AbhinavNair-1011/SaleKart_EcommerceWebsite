@@ -162,42 +162,65 @@ function CheckoutPage() {
   }
 
   return (
-    <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-3">
-      <div className="space-y-6 lg:col-span-2">
-        <AddressSelector
-          addresses={addresses}
-          selectedAddress={selectedAddress}
-          setSelectedAddress={setSelectedAddress}
-          onAddAddress={() => setShowAddressForm(true)}
-        />
+<div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/40">
+  <div className="mx-auto max-w-7xl px-6 py-10">
+    <div className="mb-10">
+      <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
+        Checkout
+      </p>
+
+      <h1 className="mt-2 text-2xl font-bold text-slate-900">
+        Complete Your Order
+      </h1>
+
+      <p className="mt-2 text-slate-500">
+        Review your details and place your order.
+      </p>
+    </div>
+
+    <div className="grid gap-8 lg:grid-cols-[2fr_380px]">
+      <div className="space-y-8">
+        <div className="rounded-3xl bg-white  shadow-xl shadow-slate-200/40">
+          <AddressSelector
+            addresses={addresses}
+            selectedAddress={selectedAddress}
+            setSelectedAddress={setSelectedAddress}
+            onAddAddress={() => setShowAddressForm(true)}
+          />
+        </div>
+
         {showAddressForm && (
           <AddressModal
             onClose={() => setShowAddressForm(false)}
-            title={`Add Address`}
+            title="Add Address"
           >
             <AddressForm
               onSubmit={handleAddressCreate}
               isPending={isCreating}
-              buttonText={`Add`}
-              onSuccess={() => {
-                setShowAddressForm(false);
-              }}
+              buttonText="Add"
+              onSuccess={() => setShowAddressForm(false)}
             />
           </AddressModal>
         )}
 
-        <PaymentSelector
-          paymentMethod={paymentMethod}
-          setPaymentMethod={setPaymentMethod}
-        />
+        <div className="rounded-3xl bg-white  shadow-xl shadow-slate-200/40">
+          <PaymentSelector
+            paymentMethod={paymentMethod}
+            setPaymentMethod={setPaymentMethod}
+          />
+        </div>
       </div>
 
-      <OrderSummary
-        cart={cart}
-        onPlaceOrder={handlePlaceOrder}
-        isPending={codPending || razorpayPending}
-      />
+      <div className="sticky top-6 h-fit rounded-3xl bg-white  shadow-2xl shadow-blue-100/50">
+        <OrderSummary
+          cart={cart}
+          onPlaceOrder={handlePlaceOrder}
+          isPending={codPending || razorpayPending}
+        />
+      </div>
     </div>
+  </div>
+</div>
   );
 }
 export default CheckoutPage;

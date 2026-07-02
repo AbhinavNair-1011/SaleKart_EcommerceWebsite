@@ -5,7 +5,7 @@ import OrderStatusBadge from "./OrderStatusBadge";
 
 function OrderCard({ order }) {
   return (
-    <div className="rounded-xl border bg-white p-6 shadow-sm">
+    <div className="rounded-xl border-b border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between">
         <div>
           <p className="font-semibold">
@@ -19,7 +19,7 @@ function OrderCard({ order }) {
 
         <div className="text-right">
           <p className="font-semibold">
-            ₹{order.totalAmount}
+            {order.totalAmount}
           </p>
 
         
@@ -39,7 +39,7 @@ function OrderCard({ order }) {
 
       <div className="mt-5">
         <Link to={`/orders/${order.id}`}>
-          <Button>
+          <Button className="bg-slate-600 hover:bg-slate-700">
             View Details
           </Button>
         </Link>

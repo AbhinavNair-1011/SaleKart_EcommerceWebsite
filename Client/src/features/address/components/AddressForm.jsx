@@ -35,64 +35,86 @@ function AddressForm({ defaultValues, onSubmit, isPending, buttonText }) {
   }, [defaultValues, reset]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <Input
-        id="houseNumber"
-        label="House / Flat No"
-        register={register("houseNumber")}
-        error={errors.houseNumber}
-      />
+ <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+  <div>
+    <h2 className="text-xl font-semibold text-slate-900">
+      Address Details
+    </h2>
 
-      <Input
-        id="area"
-        label="Area / Street"
-        register={register("area")}
-        error={errors.area}
-      />
+    <p className="mt-1 text-sm text-slate-500">
+      Enter your delivery address information.
+    </p>
+  </div>
 
-      <Input
-        id="landmark"
-        label="Landmark"
-        register={register("landmark")}
-        error={errors.landmark}
-      />
+  <div className="grid gap-4 md:grid-cols-2">
+    <Input
+      id="houseNumber"
+      label="House / Flat No"
+      register={register("houseNumber")}
+      error={errors.houseNumber}
+    />
 
-      <Input
-        id="city"
-        label="City"
-        register={register("city")}
-        error={errors.city}
-      />
+    <Input
+      id="area"
+      label="Area / Street"
+      register={register("area")}
+      error={errors.area}
+    />
+  </div>
 
-      <Input
-        id="state"
-        label="State"
-        register={register("state")}
-        error={errors.state}
-      />
+  <Input
+    id="landmark"
+    label="Landmark (Optional)"
+    register={register("landmark")}
+    error={errors.landmark}
+  />
 
-      <Input
-        id="pincode"
-        label="Pincode"
-        register={register("pincode")}
-        error={errors.pincode}
-      />
+  <div className="grid gap-4 md:grid-cols-2">
+    <Input
+      id="city"
+      label="City"
+      register={register("city")}
+      error={errors.city}
+    />
 
-      <Select
-        id="addressType"
-        label="Address Type"
-        register={register("addressType")}
-        error={errors.addressType}
-      >
-        <option value="home">Home</option>
-        <option value="work">Work</option>
-        <option value="other">Other</option>
-      </Select>
+    <Input
+      id="state"
+      label="State"
+      register={register("state")}
+      error={errors.state}
+    />
+  </div>
 
-      <Button type="submit" disabled={isPending} className="w-full">
-        {isPending ? "Saving..." : buttonText}
-      </Button>
-    </form>
+  <div className="grid gap-4 md:grid-cols-[1fr_180px]">
+    <Input
+      id="pincode"
+      label="Pincode"
+      register={register("pincode")}
+      error={errors.pincode}
+    />
+
+    <Select
+      id="addressType"
+      label="Address Type"
+      register={register("addressType")}
+      error={errors.addressType}
+    >
+      <option value="home">Home</option>
+      <option value="work">Work</option>
+      <option value="other">Other</option>
+    </Select>
+  </div>
+
+  <div className="flex justify-end border-t border-slate-100 pt-5">
+    <Button
+      type="submit"
+      disabled={isPending}
+      className="min-w-[170px] bg-slate-900 hover:bg-slate-800"
+    >
+      {isPending ? "Saving..." : buttonText}
+    </Button>
+  </div>
+</form>
   );
 }
 

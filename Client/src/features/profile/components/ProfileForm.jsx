@@ -59,35 +59,47 @@ function ProfileForm({ user }) {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4 rounded-xl border bg-white p-6 shadow"
+  onSubmit={handleSubmit(onSubmit)}
+  className="space-y-5"
+>
+  <Input
+    id="name"
+    label="Full Name"
+    register={register("name")}
+    error={errors.name}
+  />
+
+  <Input
+    id="phone"
+    label="Phone Number"
+    register={register("phone")}
+    error={errors.phone}
+  />
+
+  <Input
+    label="Email"
+    value={user?.email}
+    disabled
+    className="cursor-not-allowed bg-gray-100"
+  />
+
+  <Input
+    id="userName"
+    label="Username"
+    register={register("userName")}
+    error={errors.userName}
+  />
+
+  <div className="flex justify-end pt-2">
+    <Button
+      type="submit"
+      disabled={isPending}
+      className="bg-slate-600 hover:bg-slate-700 min-w-40"
     >
-      <Input
-        id="name"
-        label="Full Name"
-        register={register("name")}
-        error={errors.name}
-      />
-
-      <Input
-        id="phone"
-        label="Phone Number"
-        register={register("phone")}
-        error={errors.phone}
-      />
-
-      <Input label="Email" value={user?.email} disabled className={`bg-gray-300 cursor-not-allowed`}/>
-
-      <Input
-        id="userName"
-        label="Username"
-        register={register("userName")}
-        error={errors.userName}
-      />
-      <Button type="submit" disabled={isPending}>
-        {isPending ? "Saving..." : "Update Profile"}
-      </Button>
-    </form>
+      {isPending ? "Saving..." : "Update Profile"}
+    </Button>
+  </div>
+</form>
   );
 }
 

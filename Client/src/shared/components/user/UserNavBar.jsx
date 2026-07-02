@@ -15,9 +15,9 @@ return acc= acc + item.quantity
   }, 0)
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
+    <header className="sticky top-0 z-50 p-5 border-b bg-white shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <NavLink to="/" className="text-2xl font-bold text-indigo-600">
+        <NavLink to="/" className="text-3xl font-bold text-indigo-600">
           SaleKart
         </NavLink>
 

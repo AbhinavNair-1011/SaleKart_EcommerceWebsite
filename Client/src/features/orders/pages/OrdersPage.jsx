@@ -15,19 +15,29 @@ function OrdersPage() {
   const orders = data?.data?.orders ?? [];
 
   return (
-    <div className="mx-auto max-w-6xl space-y-6">
-      <h1 className="text-3xl font-bold">My Orders</h1>
+    <div className="mx-auto max-w-6xl px-6 py-10">
+  <div className="mb-8">
+    <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
+      Orders
+    </p>
 
-      {orders.length === 0 ? (
-      <EmptyState title={`No orders found`} />
-      ) : (
-        <div className="space-y-5">
-          {orders.map((order) => (
-            <OrderCard key={order.id} order={order} />
-          ))}
-        </div>
-      )}
+    <p className="mt-2 text-gray-500">
+      Track your purchases and view your previous orders.
+    </p>
+  </div>
+
+  {orders.length === 0 ? (
+    <div className="rounded-3xl bg-white p-12 text-center shadow-xl shadow-slate-200/40">
+      <EmptyState title="No orders found" />
     </div>
+  ) : (
+    <div className="space-y-6">
+      {orders.map((order) => (
+        <OrderCard key={order.id} order={order} />
+      ))}
+    </div>
+  )}
+</div>
   );
 }
 
