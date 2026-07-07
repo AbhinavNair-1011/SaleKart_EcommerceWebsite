@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getAllOrders } from "../api/ordersApi";
 
-function useAllOrders() {
+function useAllOrders(params) {
   return useQuery({
-    queryKey: ["admin-orders"],
-    queryFn: getAllOrders,
+    queryKey: ["admin-orders",params],
+    queryFn: ()=>getAllOrders(params),
   });
 }
 

@@ -28,7 +28,7 @@ function ProductPage() {
     search: debouncedSearch,
     categoryId,
     page,
-    limit: 12,
+    limit: 8  ,
   });
 
   const { data: categoryData } = useCategories();
@@ -139,7 +139,7 @@ function ProductPage() {
       onClick={() => setPage((prev) => prev - 1)}
       className="rounded-lg bg-white px-5 py-2.5 font-medium shadow-sm transition hover:shadow-md disabled:cursor-not-allowed disabled:opacity-40"
     >
-      ← Previous
+      Previous
     </button>
 
     <div className="rounded-lg bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white">
@@ -151,7 +151,7 @@ function ProductPage() {
       onClick={() => setPage((prev) => prev + 1)}
       className="rounded-lg bg-slate-900 px-5 py-2.5 font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
     >
-      Next →
+      Next 
     </button>
   </div>
 </div>

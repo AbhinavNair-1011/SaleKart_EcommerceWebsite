@@ -38,6 +38,15 @@ function LoginForm() {
       },
 
       onError: (error) => {
+        const err = error.response.data;
+        if (err.error.name === "emailVerify" && err.statusCode === 403) {
+          sessionStorage.setItem(
+            "registrationEmail",
+            JSON.stringify(formData.email),
+          );
+
+          navigate("/verify-email");
+        }
         toast.error(
           error.response?.data?.error?.message || "Something went wrong.",
         );

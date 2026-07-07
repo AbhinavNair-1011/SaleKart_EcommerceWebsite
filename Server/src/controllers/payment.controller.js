@@ -13,6 +13,8 @@ const {sequelize} = require("../config/db")
 const AppError = require("../utils/AppError");
 
 async function verifyPayment(req, res) {
+
+  console.log(req.body)
   const {    addressId,    razorpay_order_id,    razorpay_payment_id,
     razorpay_signature  } = req.body;
 

@@ -1,9 +1,18 @@
+const { Op } = require("sequelize");
 const { Order, OrderItem, Address, User } = require("../models");
 
 const AppError = require("../utils/AppError");
 
 async function getMyOrders(req, res) {
-  const orders = await Order.findAll({
+  const { search, page = 1, limit = 8 } = req.query;
+
+  const currentPage = Number(page);
+
+  const pageSize = Number(limit);
+
+  const offset = (currentPage - 1) * pageSize;
+  const { rows: orders, count: totalOrders } = await Order.findAndCountAll({
+    distinct:true,
     where: {
       userId: req.user.userId,
     },
@@ -43,12 +52,27 @@ async function getMyOrders(req, res) {
     ],
 
     order: [["createdAt", "DESC"]],
+    limit: pageSize,
+
+    offset,
   });
+
+  let totalPages = Math.ceil(totalOrders / pageSize)  ;
+
+  if (totalPages === 0) {
+    totalPages = 1;
+  }
 
   return res.status(200).json({
     success: true,
     data: {
       orders,
+      pagination: {
+        page: currentPage,
+        limit: pageSize,
+        totalOrders,
+        totalPages,
+      },
     },
     error: null,
   });
@@ -161,8 +185,26 @@ async function cancelOrder(req, res) {
     error: null,
   });
 }
+
 async function getAllOrders(req, res) {
-  const orders = await Order.findAll({
+  const { search, page = 1, limit = 8 } = req.query;
+
+  const currentPage = Number(page);
+
+  const pageSize = Number(limit);
+
+  const offset = (currentPage - 1) * pageSize;
+
+  const userWhere = {};
+
+  if (search) {
+    userWhere.email = {
+      [Op.like]: `%${search}%`,
+    };
+  }
+
+  const { rows: orders, count: totalOrders } = await Order.findAndCountAll({
+    distinct:true,
     attributes: [
       "id",
       "subtotal",
@@ -177,6 +219,8 @@ async function getAllOrders(req, res) {
     include: [
       {
         model: User,
+
+        where: search ? userWhere : undefined,
 
         attributes: ["id", "name", "email"],
       },
@@ -203,13 +247,35 @@ async function getAllOrders(req, res) {
     ],
 
     order: [["createdAt", "DESC"]],
+
+    limit: pageSize,
+
+    offset,
   });
+  console.log(totalOrders);
+  let totalPages = Math.ceil(totalOrders / pageSize) ;
+
+  if (totalPages === 0) {
+    totalPages = 1;
+  }
 
   return res.status(200).json({
     success: true,
+
     data: {
       orders,
+
+      pagination: {
+        page: currentPage,
+
+        limit: pageSize,
+
+        totalOrders,
+
+        totalPages,
+      },
     },
+
     error: null,
   });
 }
@@ -267,11 +333,12 @@ async function getOrderByIdForAdmin(req, res) {
     error: null,
   });
 }
+
 module.exports = {
   getMyOrders,
   getAllOrders,
   getOrderById,
   updateOrderStatus,
   cancelOrder,
-  getOrderByIdForAdmin
+  getOrderByIdForAdmin,
 };

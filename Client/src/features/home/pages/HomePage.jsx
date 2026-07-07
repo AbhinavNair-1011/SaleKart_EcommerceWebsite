@@ -14,10 +14,12 @@ function HomePage() {
 
   const { data: productData, isLoading } = useProducts({
     page: 1,
-    limit: 8,
+    limit: 4,
   });
 
-  const { data: categoryData } = useCategories();
+  const { data: categoryData } = useCategories({
+    
+  });
 
   if (isLoading) {
     return <Loader />;
@@ -31,7 +33,7 @@ function HomePage() {
 
   return (
    <div className="mx-auto max-w-[90%] space-y-12 py-8">
-  <section className="overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 px-10 py-14 text-white">
+  <section className="overflow-hidden rounded-2xl bg-linear-to-r from-slate-900 via-slate-800 to-slate-900 px-10 py-14 text-white">
     <div className="max-w-2xl">
       <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-slate-300">
         Welcome Back

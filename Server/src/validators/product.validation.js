@@ -1,24 +1,15 @@
 const { z } = require("zod");
 
 const createProductSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, "Product name must be at least 2 characters")
-    .max(100),
+  name: z.string().trim().min(2).max(100),
 
-  description: z
-    .string()
-    .trim()
-    .min(10, "Description must be at least 10 characters"),
+  description: z.string().trim().min(10),
 
-  price: z.number().positive("Price must be greater than 0"),
+  price: z.coerce.number().positive(),
 
-  stock: z.number().int().min(0, "Stock cannot be negative"),
+  stock: z.coerce.number().int().min(0),
 
-  imageUrl: z.string().trim().min(1, "Image URL is required"),
-
-  categoryId: z.uuid("Invalid category"),
+  categoryId: z.string().uuid(),
 });
 
 const updateProductSchema = z
@@ -27,18 +18,16 @@ const updateProductSchema = z
 
     description: z.string().trim().min(10).optional(),
 
-    price: z.number().positive().optional(),
+    price: z.coerce.number().positive(),
 
-    stock: z.number().int().min(0).optional(),
-
-    imageUrl: z.string().trim().optional(),
+    stock: z.coerce.number().int().min(0),
 
     categoryId: z.uuid().optional(),
   })
   .strict();
 
 const getProductsQuerySchema = z.object({
-  q: z.string().trim().optional(),
+  search: z.string().trim().optional(),
 
   categoryId: z.string().optional(),
 

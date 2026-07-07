@@ -52,6 +52,7 @@ function ForgotPasswordForm() {
   }
 
   return (
+    <div className="">
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="space-y-4"
@@ -64,6 +65,7 @@ function ForgotPasswordForm() {
         error={errors.email}
       />
 
+<div className="flex justify-between ">
       <Button
         type="submit"
         disabled={isPending}
@@ -72,7 +74,10 @@ function ForgotPasswordForm() {
           ? "Sending..."
           : "Send OTP"}
       </Button>
+    <button className="underline cursor-pointer " onClick={()=>{navigate("/login")}}> back to login </button>
+    </div>
     </form>
+    </div>
   );
 }
 

@@ -10,6 +10,7 @@ const validate = require("../middlewares/validate");
 const {
   createCategorySchema,
   updateCategorySchema,
+  getCategorySchema,
 } = require("../validators/category.validation");
 
 const {
@@ -28,17 +29,23 @@ router.post(
   createCategory,
 );
 
-router.get("/", getAllCategories);
+router.get("/", validate(getCategorySchema,"query"), getAllCategories);
 
 router.get("/:id", validate(uuidParamSchema, "params"), getCategoryById);
 
-router.patch("/:id",authMiddleware,authorize("admin"),
+router.patch(
+  "/:id",
+  authMiddleware,
+  authorize("admin"),
   validate(uuidParamSchema, "params"),
   validate(updateCategorySchema),
   updateCategory,
 );
 
-router.delete("/:id", authMiddleware, authorize("admin"),
+router.delete(
+  "/:id",
+  authMiddleware,
+  authorize("admin"),
   validate(uuidParamSchema, "params"),
   deleteCategory,
 );

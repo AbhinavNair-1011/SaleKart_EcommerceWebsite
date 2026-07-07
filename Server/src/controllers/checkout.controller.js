@@ -174,7 +174,7 @@ async function checkoutRazorpay(req, res) {
   const totalAmount = subtotal + deliveryCharge;
 
   const razorpayOrder = await razorpay.orders.create({
-    amount: totalAmount * 1,
+    amount: totalAmount * 100,
     currency: "INR",
     receipt: `receipt_${Date.now()}`,
   });

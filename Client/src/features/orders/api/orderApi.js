@@ -1,7 +1,9 @@
 import api from "../../../app/api/axios";
 
-export async function getOrders() {
-  const response = await api.get("/orders");
+export async function getOrders(params) {
+  const response = await api.get("/orders", {
+    params
+  });
 
   console.log(response);
   return response.data;

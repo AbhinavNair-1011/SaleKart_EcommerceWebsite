@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Category } = require("../models");
 const AppError = require("../utils/AppError");
 
@@ -28,14 +29,48 @@ async function createCategory(req, res) {
 }
 
 async function getAllCategories(req, res) {
-  const categories = await Category.findAll({
-    order: [["name", "ASC"]],
-  });
+  const { page = 1, limit = 8, sortBy, order, search } = req.query;
 
+  console.log(req.query)
+  const where = {};
+
+  if (search) {
+    where.name = {
+      [Op.like]: `%${search}%`,
+    };
+  }
+
+  const currentPage = Number(page);
+
+  const pageSize = Number(limit);
+
+  let offset = pageSize * (currentPage - 1);
+
+  const { rows: categories, count: totalCategories } =
+    await Category.findAndCountAll({
+      where,
+      order: [["name", "ASC"]],
+      limit: pageSize,
+      offset,
+    });
+
+  let totalPages = Math.ceil(totalCategories / pageSize);
+  if (totalPages === 0) {
+    totalPages = 1;
+  }
   return res.status(200).json({
     success: true,
     data: {
       categories,
+      pagination: {
+        page: currentPage,
+
+        limit: pageSize,
+
+        totalCategories,
+
+        totalPages,
+      },
     },
     error: null,
   });

@@ -125,7 +125,10 @@ function VerifyEmailForm() {
         onClick={() => setShowChangeEmail((prev) => !prev)}
         className="text-sm white underline hover:underline"
       >
-        Wrong email ? Change Email
+        {
+          showChangeEmail ? "correct email?" :" Wrong email ? Change Email" 
+        }
+     
       </button>
 
       {showChangeEmail && (
@@ -157,6 +160,8 @@ function VerifyEmailForm() {
           {isResending ? "Sending..." : "Resend OTP"}
         </Button>
       </div>
+          
+
     </form>
   );
 }

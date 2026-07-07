@@ -3,7 +3,7 @@ const app = require("./app");
 const { connectDb, sequelize } = require("./config/db");
 
 const PORT = process.env.PORT || 4000;
-
+const startSessionCleanupJob = require("./job/sessionCleanup.job");
 
 async function startServer() {
 
@@ -11,6 +11,7 @@ async function startServer() {
 await sequelize.sync();
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    startSessionCleanupJob()
   });
 }
 

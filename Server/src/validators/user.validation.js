@@ -6,7 +6,7 @@ const updateProfileSchema = z
 
     userName: z.string().trim().min(3).optional(),
 
-    phone: z.string().trim().min(10).max(15).optional(),
+    phone: z.string().trim().min(9).max(10).optional(),
   })
   .strict();
 

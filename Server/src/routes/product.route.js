@@ -21,11 +21,14 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/product.controller");
+const upload = require("../middlewares/upload");
+
 
 router.post(
   "/",
   authMiddleware,
   authorize("admin"),
+  upload.single("image"),
   validate(createProductSchema),
   createProduct,
 );
@@ -34,10 +37,12 @@ router.get("/", validate(getProductsQuerySchema, "query"), getAllProducts);
 
 router.get("/:id", validate(uuidParamSchema, "params"), getProductById);
 
+
 router.patch(
   "/:id",
   authMiddleware,
   authorize("admin"),
+  upload.single("image"),
   validate(uuidParamSchema, "params"),
   validate(updateProductSchema),
   updateProduct,

@@ -19,7 +19,16 @@ const updateCategorySchema = z
   })
   .strict();
 
+const getCategorySchema = z.object({
+  limit: z.coerce.number().optional().optional(),
+  order: z.enum(["asc", "dsc"]).optional(),
+  search: z.string().optional(),
+  sortBy: z.any().optional(),
+  page: z.coerce.number().int().min(1).optional(),
+});
+
 module.exports = {
   createCategorySchema,
   updateCategorySchema,
+  getCategorySchema
 };

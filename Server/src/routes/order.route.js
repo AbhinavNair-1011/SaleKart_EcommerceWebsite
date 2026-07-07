@@ -8,7 +8,7 @@ const validate = require("../middlewares/validate");
 
 const { uuidParamSchema } = require("../validators/uuid.validation");
 
-const { updateOrderStatusSchema } = require("../validators/order.validation");
+const { updateOrderStatusSchema, getAllOrdersSchema } = require("../validators/order.validation");
 
 const {
   getMyOrders,
@@ -21,7 +21,7 @@ const {
 
 router.get("/", authMiddleware, getMyOrders);
 
-router.get("/all", authMiddleware,authorize("admin"), getAllOrders);
+router.get("/all", authMiddleware,authorize("admin") ,validate(getAllOrdersSchema , "query"), getAllOrders);
 
 router.get(
   "/admin/:id",

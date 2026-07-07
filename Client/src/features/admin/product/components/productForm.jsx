@@ -28,21 +28,58 @@ function ProductForm({
       description: "",
       price: "",
       stock: "",
-      imageUrl: "",
       categoryId: "",
+      image: "",
     },
   });
 
   useEffect(() => {
     if (defaultValues) {
-      reset(defaultValues);
+      reset({
+        name: defaultValues.name,
+        description: defaultValues.description,
+        price: defaultValues.price,
+        stock: defaultValues.stock,
+        categoryId: defaultValues.categoryId,
+      });
     }
   }, [defaultValues, reset]);
 
+  function handleFormSubmit(data) {
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+
+    formData.append("description", data.description);
+
+    formData.append("price", data.price);
+
+    formData.append("stock", data.stock);
+
+    formData.append("categoryId", data.categoryId);
+
+    if (data.image?.length > 0) {
+      formData.append("image", data.image[0]);
+    }
+
+    onSubmit(formData);
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
+      <div>
+        <h2 className="text-xl font-semibold text-slate-900">
+          Product Information
+        </h2>
+
+        <p className="mt-1 text-sm text-slate-500">
+          Fill in the details below to create or update a product.
+        </p>
+      </div>
+
       <Input
         label="Product Name"
+        placeholder="e.g. Wireless Mouse"
         register={register("name")}
         error={errors.name}
       />
@@ -54,44 +91,79 @@ function ProductForm({
         error={errors.description}
       />
 
-      <Input
-        type="number"
-        label="Price"
-        register={register("price")}
-        error={errors.price}
-      />
+      <div className="grid gap-4 md:grid-cols-2">
+        <Input
+          type="number"
+          label="Price"
+          placeholder="0.00"
+          register={register("price")}
+          error={errors.price}
+        />
 
-      <Input
-        type="number"
-        label="Stock"
-        register={register("stock")}
-        error={errors.stock}
-      />
+        <Input
+          type="number"
+          label="Stock"
+          placeholder="0"
+          register={register("stock")}
+          error={errors.stock}
+        />
+      </div>
 
-      <Input
-        label="Image URL"
-        register={register("imageUrl")}
-        error={errors.imageUrl}
-      />
+      {defaultValues?.imageUrl && (
+        <div>
+          <p className="mb-2 text-sm font-medium">Current Image</p>
 
-      <Select
-        id="categoryId"
-        label="Category"
-        register={register("categoryId")}
-        error={errors.categoryId}
-      >
-        <option value="">Select Category</option>
+          <img
+            src={defaultValues.imageUrl}
+            alt={defaultValues.name}
+            className="h-32 w-32 rounded-lg object-cover"
+          />
+        </div>
+      )}
 
-        {categories.map((category) => (
-          <option key={category.id} value={category.id}>
-            {category.name}
-          </option>
-        ))}
-      </Select>
+      <div className="grid gap-4 md:grid-cols-[2fr_1fr]">
+        <div>
+          <label className="mb-2 block text-sm font-medium">
+            Product Image
+          </label>
 
-      <Button type="submit" disabled={isPending}>
-        {isPending ? "Saving..." : buttonText}
-      </Button>
+          <input
+            type="file"
+            accept="image/*"
+            {...register("image")}
+            className="w-full rounded-lg border p-2"
+          />
+
+          {errors.image && (
+            <p className="mt-1 text-sm text-red-500">{errors.image.message}</p>
+          )}
+        </div>
+
+        <Select
+          id="categoryId"
+          label="Category"
+          register={register("categoryId")}
+          error={errors.categoryId}
+        >
+          <option value="">Select Category</option>
+
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </Select>
+      </div>
+
+      <div className="flex justify-end border-t border-slate-100 pt-5">
+        <Button
+          type="submit"
+          disabled={isPending}
+          className="min-w-45 bg-slate-900 hover:bg-slate-800"
+        >
+          {isPending ? "Saving..." : buttonText}
+        </Button>
+      </div>
     </form>
   );
 }

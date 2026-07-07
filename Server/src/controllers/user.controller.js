@@ -43,6 +43,7 @@ async function updateMyProfile(req, res) {
     }
   }
 
+
   await user.update(req.body);
 
   console.log(user);
@@ -62,7 +63,25 @@ async function updateMyProfile(req, res) {
 }
 
 async function getAllUsers(req, res) {
-  const users = await User.findAll({
+  const { search, page = 1, limit = 8 } = req.query;
+
+  const currentPage = Number(page);
+
+  const pageSize = Number(limit);
+
+  const offset = (currentPage - 1) * pageSize;
+
+  const where = {};
+
+  if (search) {
+    where.email = {
+      [Op.like]: `%${search}%`,
+    };
+  }
+
+  const { rows: users, count: totalUsers } = await User.findAndCountAll({
+    where,
+
     attributes: [
       "id",
       "name",
@@ -74,18 +93,40 @@ async function getAllUsers(req, res) {
     ],
 
     order: [["createdAt", "DESC"]],
+
+    limit: pageSize,
+
+    offset,
   });
+
+  let totalPages = Math.ceil(totalUsers / pageSize);
+
+  if (totalPages === 0) {
+    totalPages = 1;
+  }
 
   return res.status(200).json({
     success: true,
+
     data: {
       users,
+
+      pagination: {
+        page: currentPage,
+
+        limit: pageSize,
+
+        totalUsers,
+
+        totalPages,
+      },
     },
+
     error: null,
   });
 }
 module.exports = {
   getMyProfile,
   updateMyProfile,
-  getAllUsers
+  getAllUsers,
 };

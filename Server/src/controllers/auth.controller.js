@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 
 const { User, Session, Verification } = require("../models");
 
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/AppError.js");
 const {
   generateAccessToken,
   generateRefreshToken,
@@ -19,7 +19,10 @@ const {
   accessCookieOptions,
   refreshCookieOptions,
 } = require("../shared/cookieOptions");
-const { emailVerificationTemplate, passwordResetTemplate } = require("../utils/EmailTemplate.js");
+const {
+  emailVerificationTemplate,
+  passwordResetTemplate,
+} = require("../utils/EmailTemplate.js");
 
 async function register(req, res) {
   let { name, email, password, userName } = req.body;
@@ -32,7 +35,11 @@ async function register(req, res) {
   });
 
   if (existingEmail) {
-    throw new AppError("Email already exists", 409, "ConflictError");
+    if (existingEmail.isVerifed) {
+      await existingEmail.destroy();
+    } else {
+      throw new AppError("Email already exists", 409, "ConflictError");
+    }
   }
 
   const existingUsername = await User.findOne({
@@ -120,7 +127,7 @@ async function login(req, res) {
   });
 
   if (!user) {
-    throw new AppError("Invalid credentials", 401, "AuthenticationError");
+    throw new AppError("No user by this email", 401, "AuthenticationError");
   }
 
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
@@ -129,11 +136,7 @@ async function login(req, res) {
     throw new AppError("Invalid credentials", 401, "AuthenticationError");
   }
   if (!user.isVerified) {
-    throw new AppError(
-      "Please verify your email first.",
-      403,
-      "AuthenticationError",
-    );
+    throw new AppError("Please verify your email first.", 403, "emailVerify");
   }
 
   const session = await Session.create({
@@ -170,6 +173,7 @@ async function login(req, res) {
         email: user.email,
         userName: user.userName,
         role: user.role,
+        phone: user.phone,
       },
     },
     error: null,

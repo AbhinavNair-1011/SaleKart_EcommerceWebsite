@@ -1,9 +1,14 @@
 const { Product, Category } = require("../models");
 const AppError = require("../utils/AppError");
 const { Op } = require("sequelize");
+const uploadToS3 = require("../utils/uploadToS3");
 
 async function createProduct(req, res) {
-  const { name, description, price, stock, imageUrl, categoryId } = req.body;
+  const { name, description, price, stock, categoryId } = req.body;
+
+  if (!req.file) {
+    throw new AppError("Product image required", 400, "ValidationError");
+  }
 
   const category = await Category.findByPk(categoryId);
 
@@ -11,13 +16,15 @@ async function createProduct(req, res) {
     throw new AppError("Category not found", 404, "NotFoundError");
   }
 
+  const imageUrl = await uploadToS3(req.file);
+
   const product = await Product.create({
     name,
     description,
     price,
     stock,
-    imageUrl,
     categoryId,
+    imageUrl,
   });
 
   return res.status(201).json({
@@ -30,8 +37,7 @@ async function createProduct(req, res) {
 }
 
 async function getAllProducts(req, res) {
-  const { search, categoryId, page = 1, limit = 12 } = req.query;
-
+  const { search, categoryId, page = 1, limit = 8 } = req.query;
   const where = {};
 
   if (search) {
@@ -52,6 +58,7 @@ async function getAllProducts(req, res) {
 
   const { rows: products, count: totalProducts } =
     await Product.findAndCountAll({
+      distinct:true,
       where,
 
       include: {
@@ -66,10 +73,10 @@ async function getAllProducts(req, res) {
       offset,
     });
 
-    let totalPages= Math.ceil(totalProducts / pageSize)
-    if(totalPages===0){
-        totalPages=1
-    }
+  let totalPages = Math.ceil(totalProducts / pageSize);
+  if (totalPages === 0) {
+    totalPages = 1;
+  }
   return res.status(200).json({
     success: true,
 
@@ -83,7 +90,7 @@ async function getAllProducts(req, res) {
 
         totalProducts,
 
-        totalPages
+        totalPages,
       },
     },
 
@@ -113,7 +120,6 @@ async function getProductById(req, res) {
     error: null,
   });
 }
-
 async function updateProduct(req, res) {
   const { id } = req.params;
 
@@ -123,21 +129,24 @@ async function updateProduct(req, res) {
     throw new AppError("Product not found", 404, "NotFoundError");
   }
 
-  if (req.body.categoryId) {
-    const category = await Category.findByPk(req.body.categoryId);
+  let imageUrl = product.imageUrl;
 
-    if (!category) {
-      throw new AppError("Category not found", 404, "NotFoundError");
-    }
+  if (req.file) {
+    imageUrl = await uploadToS3(req.file);
   }
 
-  await product.update(req.body);
+  await product.update({
+    ...req.body,
+    imageUrl,
+  });
 
   return res.status(200).json({
     success: true,
+
     data: {
       product,
     },
+
     error: null,
   });
 }

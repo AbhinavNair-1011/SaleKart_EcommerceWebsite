@@ -7,7 +7,13 @@ let name=err.name || "error";
 let stack= err.stack || {}
 let statusCode= err.statusCode || 500 
 
-console.log(err)
+
+if(err.name==="SequelizeUniqueConstraintError"){
+
+    const field= Object.keys(err.fields)
+    message=`${field} already registered`
+
+}
 return res.status(statusCode).json({
     success:false,
     statusCode,

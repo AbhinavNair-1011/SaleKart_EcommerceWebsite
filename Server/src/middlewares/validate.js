@@ -7,9 +7,9 @@ function validate(schema, source = "body") {
     if (!result.success) {
       const message = result.error.issues.map((issue) => issue.message).join(", ");
 
-      return next(
-        new AppError(message, 400, "ValidationError")
-      );
+     
+      throw new AppError(message, 400, "ValidationError")
+      
     }
 
     req[source] = result.data;

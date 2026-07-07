@@ -15,7 +15,7 @@ const profileSchema = z.object({
     .string()
     .trim()
     .min(10, "Phone number must be at least 10 digits")
-    .max(15, "Phone number cannot exceed 15 digits"),
+    .max(10, "Phone number cannot exceed 10 digits"),
 });
 
 export default profileSchema;

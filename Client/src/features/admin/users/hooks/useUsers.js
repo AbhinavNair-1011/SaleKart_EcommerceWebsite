@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getUsers } from "../api/usersApi"
 
-function useUsers() {
+function useUsers(params) {
   return useQuery({
-    queryKey: ["users"],
-    queryFn: getUsers,
+    queryKey: ["users",params],
+    queryFn: ()=>getUsers(params),
   });
 }
 

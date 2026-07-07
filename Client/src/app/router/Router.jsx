@@ -1,40 +1,85 @@
+import { lazy, Suspense } from "react";
+
 import { createBrowserRouter } from "react-router-dom";
 
 import AuthLayout from "../layouts/AuthLayout";
-
-import LoginPage from "../../features/auth/pages/LoginPage";
-import RegisterPage from "../../features/auth/pages/RegisterPage";
-
-import HomePage from "../../features/home/pages/HomePage";
-
-import CategoryPage from "../../features/admin/categories/pages/CategoryPage";
+import UserLayout from "../layouts/UserLayout";
+import AdminLayout from "../layouts/AdminLayout";
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import AdminRoute from "./AdminRoute";
-
-import UserLayout from "../layouts/UserLayout";
-import AdminLayout from "../layouts/AdminLayout";
 import UserRoute from "./UserRoute";
 
-import ProfilePage from "../../features/profile/pages/ProfilePage";
-import ProductPage from "../../features/products/pages/ProductPage";
-import CartPage from "../../features/cart/pages/CartPage";
+const LoginPage = lazy(() => import("../../features/auth/pages/LoginPage"));
 
-import OrdersPage from "../../features/orders/pages/OrdersPage";
-import OrderDetailsPage from "../../features/orders/pages/OrderDetailsPage";
-import CheckoutPage from "../../features/checkout/CheckoutPage";
+const RegisterPage = lazy(
+  () => import("../../features/auth/pages/RegisterPage"),
+);
 
-import AdminOrdersPage from "../../features/admin/orders/pages/AdminOrdersPage";
-import AdminOrderDetailsPage from "../../features/admin/orders/pages/AdminOrderDetailsPage";
-import AdminProductPage from "../../features/admin/product/pages/AdminProductPage";
-import AdminDashboardPage from "../../features/admin/dashboard/pages/AdminDashboardPage";
-import UsersPage from "../../features/admin/users/pages/UsersPage";
+const VerifyEmailPage = lazy(
+  () => import("../../features/auth/pages/VerifyEmailPage"),
+);
 
-import NotFoundPage from "../../pages/NotFountPage";
-import VerifyEmailPage from "../../features/auth/pages/VerifyEmailPage";
-import ForgotPasswordPage from "../../features/auth/pages/ForgotPasswordPage";
-import ResetPasswordPage from "../../features/auth/pages/ResetPasswordPage";
+const ForgotPasswordPage = lazy(
+  () => import("../../features/auth/pages/ForgotPasswordPage"),
+);
+
+const ResetPasswordPage = lazy(
+  () => import("../../features/auth/pages/ResetPasswordPage"),
+);
+
+const HomePage = lazy(() => import("../../features/home/pages/HomePage"));
+
+const ProfilePage = lazy(
+  () => import("../../features/profile/pages/ProfilePage"),
+);
+
+const ProductPage = lazy(
+  () => import("../../features/products/pages/ProductPage"),
+);
+
+const CartPage = lazy(() => import("../../features/cart/pages/CartPage"));
+
+const CheckoutPage = lazy(() => import("../../features/checkout/CheckoutPage"));
+
+const OrdersPage = lazy(() => import("../../features/orders/pages/OrdersPage"));
+
+const OrderDetailsPage = lazy(
+  () => import("../../features/orders/pages/OrderDetailsPage"),
+);
+
+const AdminDashboardPage = lazy(
+  () => import("../../features/admin/dashboard/pages/AdminDashboardPage"),
+);
+
+const CategoryPage = lazy(
+  () => import("../../features/admin/categories/pages/CategoryPage"),
+);
+
+const AdminProductPage = lazy(
+  () => import("../../features/admin/product/pages/AdminProductPage"),
+);
+
+const AdminOrdersPage = lazy(
+  () => import("../../features/admin/orders/pages/AdminOrdersPage"),
+);
+
+const AdminOrderDetailsPage = lazy(
+  () => import("../../features/admin/orders/pages/AdminOrderDetailsPage"),
+);
+
+const UsersPage = lazy(
+  () => import("../../features/admin/users/pages/UsersPage"),
+);
+
+const NotFoundPage = lazy(() => import("../../pages/NotFountPage"));
+
+const withSuspense = (Component) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Component />
+  </Suspense>
+);
 
 const router = createBrowserRouter([
   {
@@ -45,24 +90,23 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/login",
-            element: <LoginPage />,
+            element: withSuspense(LoginPage),
           },
           {
             path: "/register",
-            element: <RegisterPage />,
+            element: withSuspense(RegisterPage),
           },
           {
             path: "/verify-email",
-            element: <VerifyEmailPage />,
+            element: withSuspense(VerifyEmailPage),
           },
           {
             path: "/forgot-password",
-            element: <ForgotPasswordPage/>,
+            element: withSuspense(ForgotPasswordPage),
           },
-
           {
             path: "/reset-password",
-            element: <ResetPasswordPage/>,
+            element: withSuspense(ResetPasswordPage),
           },
         ],
       },
@@ -80,31 +124,31 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/",
-                element: <HomePage />,
+                element: withSuspense(HomePage),
               },
               {
                 path: "/profile",
-                element: <ProfilePage />,
+                element: withSuspense(ProfilePage),
               },
               {
                 path: "/products",
-                element: <ProductPage />,
+                element: withSuspense(ProductPage),
               },
               {
                 path: "/cart",
-                element: <CartPage />,
+                element: withSuspense(CartPage),
               },
               {
                 path: "/checkout",
-                element: <CheckoutPage />,
+                element: withSuspense(CheckoutPage),
               },
               {
                 path: "/orders",
-                element: <OrdersPage />,
+                element: withSuspense(OrdersPage),
               },
               {
                 path: "/orders/:id",
-                element: <OrderDetailsPage />,
+                element: withSuspense(OrderDetailsPage),
               },
             ],
           },
@@ -119,28 +163,27 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/admin",
-                element: <AdminDashboardPage />,
+                element: withSuspense(AdminDashboardPage),
               },
-
               {
                 path: "/admin/categories",
-                element: <CategoryPage />,
+                element: withSuspense(CategoryPage),
               },
               {
                 path: "/admin/products",
-                element: <AdminProductPage />,
+                element: withSuspense(AdminProductPage),
               },
               {
                 path: "/admin/orders",
-                element: <AdminOrdersPage />,
+                element: withSuspense(AdminOrdersPage),
               },
               {
                 path: "/admin/users",
-                element: <UsersPage />,
+                element: withSuspense(UsersPage),
               },
               {
                 path: "/admin/orders/:id",
-                element: <AdminOrderDetailsPage />,
+                element: withSuspense(AdminOrderDetailsPage),
               },
             ],
           },
@@ -151,7 +194,7 @@ const router = createBrowserRouter([
 
   {
     path: "*",
-    element: <NotFoundPage />,
+    element: withSuspense(NotFoundPage),
   },
 ]);
 

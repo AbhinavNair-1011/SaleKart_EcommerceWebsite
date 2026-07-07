@@ -1,8 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 function AuthCard({ title, children }) {
+
+  const navigate= useNavigate()
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-bl from-blue-500 via-cyan-800 to-cyan-900 px-4 text-white">
 
       <div className="w-full max-w-lg rounded-xl  p-9 shadow-lg  bg-linear-to-bl from-gray-500 via-cyan-900 to-gray-900 ">
+             
         <h1 className="mb-6 text-center text-3xl font-bold underline ">{title}</h1>
 
         {children}
