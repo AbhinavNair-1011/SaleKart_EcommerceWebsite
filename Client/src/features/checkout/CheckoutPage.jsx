@@ -163,8 +163,8 @@ function CheckoutPage() {
 
   return (
 <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-blue-50/40">
-  <div className="mx-auto max-w-7xl px-6 py-10">
-    <div className="mb-10">
+  <div className="mx-auto max-w-7xl ">
+    <div className="mb-6 px-6 py-10">
       <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
         Checkout
       </p>

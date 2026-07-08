@@ -143,7 +143,7 @@ function AdminOrderDetailsPage() {
             </p>
 
             <p className="mt-1 text-2xl font-bold text-slate-900">
-              ₹{order.totalAmount}
+              {order.totalAmount}
             </p>
           </div>
         </div>

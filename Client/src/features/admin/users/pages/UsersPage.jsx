@@ -22,7 +22,7 @@ function UsersPage() {
   }, [search]);
 
   const { data, isLoading } = useUsers({
-    search:debouncedSearch,
+    search: debouncedSearch,
     page,
     limit: 8,
   });
@@ -39,21 +39,24 @@ function UsersPage() {
     return <Loader />;
   }
   return (
-    <div className="space-y-10">
-      <section className="overflow-hidden rounded-2xl bg-white shadow-sm">
-        <div className="flex flex-col gap-8 p-8 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-2xl">
-            <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-700">
+    <div className="w-full space-y-6 md:space-y-10">
+      <section className="w-full overflow-hidden rounded-2xl bg-white shadow-sm">
+        <div className="flex w-full flex-col gap-6 p-4 sm:p-6 md:p-8 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0 flex-1">
+            <span className="inline-block rounded-full bg-blue-100 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-blue-700 sm:text-xs">
               User Management
             </span>
 
-            <h1 className="mt-4 text-4xl font-bold text-slate-900">Users</h1>
+            <h1 className="mt-4 text-2xl font-bold text-slate-900 sm:text-3xl md:text-4xl">
+              Users
+            </h1>
 
-            <p className="mt-3 text-slate-500">
+            <p className="mt-3 max-w-xl text-sm text-slate-500 sm:text-base">
               View and manage registered users, monitor customer activity, and
               keep your store organized.
             </p>
-            <div className="relative flex-1">
+
+            <div className="mt-4 w-full">
               <input
                 placeholder="Search by user email..."
                 value={search}
@@ -61,49 +64,44 @@ function UsersPage() {
                   setSearch(e.target.value);
                   setPage(1);
                 }}
-                className="w-full rounded-xl bg-white py-3 pl-12 pr-4 outline-none ring-1 ring-slate-200 transition focus:ring-2 focus:ring-slate-400"
+                className="w-full min-w-0 rounded-xl bg-white px-4 py-3 text-sm outline-none ring-1 ring-slate-200 transition focus:ring-2 focus:ring-slate-400 md:pl-12"
               />
             </div>
           </div>
 
-          <div className="rounded-2xl bg-slate-50 px-8 py-6 text-center">
+          <div className="w-full rounded-2xl bg-slate-50 px-4 py-5 text-center sm:w-auto sm:px-8 sm:py-6">
             <p className="text-sm text-slate-500">Total Users</p>
 
-            <h2 className="mt-1 text-4xl font-bold text-slate-900">
+            <h2 className="mt-1 text-3xl font-bold text-slate-900 md:text-4xl">
               {users.length}
             </h2>
           </div>
         </div>
       </section>
 
-
-
       {users.length ? (
         <UserTable users={users} />
       ) : (
-        <EmptyState
-          title="No users Found"
-     
-        />
+        <EmptyState title="No users Found" />
       )}
-     
-      <div className="mt-10 flex items-center justify-center gap-5">
+
+      <div className="mt-8 flex w-full items-center justify-center gap-2 sm:gap-5">
         <button
           disabled={page === 1}
           onClick={() => setPage((prev) => prev - 1)}
-          className="rounded-lg bg-white px-5 py-2.5 font-medium shadow-sm transition hover:shadow-md disabled:cursor-not-allowed disabled:opacity-40"
+          className="rounded-lg bg-white px-3 py-2 text-sm font-medium shadow-sm transition hover:shadow-md disabled:cursor-not-allowed disabled:opacity-40 sm:px-5 sm:py-2.5"
         >
           Previous
         </button>
 
-        <div className="rounded-lg bg-slate-900 px-6 py-2.5 text-sm font-semibold text-white">
+        <div className="rounded-lg bg-slate-900 px-4 py-2 text-xs font-semibold text-white sm:px-6 sm:py-2.5 sm:text-sm">
           {pagination.page} of {pagination.totalPages}
         </div>
 
         <button
           disabled={page === pagination.totalPages}
           onClick={() => setPage((prev) => prev + 1)}
-          className="rounded-lg bg-slate-900 px-5 py-2.5 font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400"
+          className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400 sm:px-5 sm:py-2.5"
         >
           Next
         </button>

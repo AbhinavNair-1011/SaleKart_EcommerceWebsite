@@ -7,10 +7,10 @@ function CartSummary({ cart, onCheckout }) {
   );
 
   return (
-<div className="rounded-2xl bg-white p-6 shadow-sm">
+<div className="rounded-2xl bg-white p-4 shadow-sm md:p-6">
   <div className="mb-6">
-    <h2 className="text-2xl font-bold text-gray-900">
-      Order Summary   
+    <h2 className="text-xl font-bold text-gray-900 md:text-2xl">
+      Order Summary
     </h2>
 
     <p className="mt-1 text-sm text-gray-500">
@@ -52,21 +52,21 @@ function CartSummary({ cart, onCheckout }) {
     <div className="my-2 border-t border-dashed border-slate-200" />
 
     <div className="flex items-center justify-between">
-      <span className="text-lg font-semibold text-gray-900">
+      <span className="text-base font-semibold text-gray-900 md:text-lg">
         Total
       </span>
 
-      <span className="text-3xl font-bold text-slate-900">
+      <span className="text-2xl font-bold text-slate-900 md:text-3xl">
         {total.toFixed(2)}
       </span>
     </div>
   </div>
 
   <Button
-    className="mt-8 w-full rounded-lg bg-slate-900 py-3 text-base font-semibold hover:bg-slate-800"
+    className="mt-8 w-full rounded-lg bg-slate-900 py-3 text-sm font-semibold hover:bg-slate-800 md:text-base"
     onClick={onCheckout}
   >
-    Proceed to Checkout 
+    Proceed to Checkout
   </Button>
 
   <p className="mt-4 text-center text-xs text-gray-400">

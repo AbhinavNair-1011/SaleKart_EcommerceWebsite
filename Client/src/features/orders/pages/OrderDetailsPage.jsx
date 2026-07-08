@@ -55,7 +55,7 @@ function OrderDetailsPage() {
         Order Details
       </span>
 
-      <h1 className="mt-4 text-2xl font-bold text-gray-900">
+      <h1 className="mt-4 text-lg md:text-2xl font-bold text-gray-900">
         Order #{order.id}
       </h1>
 
@@ -65,7 +65,7 @@ function OrderDetailsPage() {
     </div>
 
     <Button
-      className="bg-slate-700 hover:bg-slate-800"
+      className="bg-slate-700 hover:bg-slate-800 "
       onClick={() => navigate(-1)}
     >
        Back

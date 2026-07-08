@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 import AdminRoute from "./AdminRoute";
 import UserRoute from "./UserRoute";
+import Loader from "../../shared/components/Loader";
 
 const LoginPage = lazy(() => import("../../features/auth/pages/LoginPage"));
 
@@ -76,7 +77,9 @@ const UsersPage = lazy(
 const NotFoundPage = lazy(() => import("../../pages/NotFountPage"));
 
 const withSuspense = (Component) => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={
+  <div className="w-full h-full  flex flex-col justify-center mx-auto"> <Loader/></div>
+ }>
     <Component />
   </Suspense>
 );

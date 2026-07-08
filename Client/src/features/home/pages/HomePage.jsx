@@ -74,46 +74,46 @@ function HomePage() {
       </p>
     </div>
 
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      <Link
-        to="/cart"
-        className="rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md"
-      >
-        <h3 className="text-lg font-semibold text-gray-900">
-          Shopping Cart
-        </h3>
+<div className="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+  <Link
+    to="/cart"
+    className="rounded-xl bg-white p-4 shadow-sm transition hover:shadow-md sm:p-6"
+  >
+    <h3 className="text-base font-semibold text-gray-900 sm:text-lg">
+      Shopping Cart
+    </h3>
 
-        <p className="mt-2 text-sm text-gray-500">
-          Review products you've added before checkout.
-        </p>
-      </Link>
+    <p className="mt-1 text-sm text-gray-500 sm:mt-2">
+      Review products you've added before checkout.
+    </p>
+  </Link>
 
-      <Link
-        to="/orders"
-        className="rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md"
-      >
-        <h3 className="text-lg font-semibold text-gray-900">
-          My Orders
-        </h3>
+  <Link
+    to="/orders"
+    className="rounded-xl bg-white p-4 shadow-sm transition hover:shadow-md sm:p-6"
+  >
+    <h3 className="text-base font-semibold text-gray-900 sm:text-lg">
+      My Orders
+    </h3>
 
-        <p className="mt-2 text-sm text-gray-500">
-          Track orders and view your purchase history.
-        </p>
-      </Link>
+    <p className="mt-1 text-sm text-gray-500 sm:mt-2">
+      Track orders and view your purchase history.
+    </p>
+  </Link>
 
-      <Link
-        to="/profile"
-        className="rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md"
-      >
-        <h3 className="text-lg font-semibold text-gray-900">
-          Profile
-        </h3>
+  <Link
+    to="/profile"
+    className="rounded-xl bg-white p-4 shadow-sm transition hover:shadow-md sm:p-6"
+  >
+    <h3 className="text-base font-semibold text-gray-900 sm:text-lg">
+      Profile
+    </h3>
 
-        <p className="mt-2 text-sm text-gray-500">
-          Manage your account information and addresses.
-        </p>
-      </Link>
-    </div>
+    <p className="mt-1 text-sm text-gray-500 sm:mt-2">
+      Manage your account information and addresses.
+    </p>
+  </Link>
+</div>
   </section>
 
  

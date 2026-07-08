@@ -17,7 +17,9 @@ function AddressSelector({ addresses, selectedAddress, setSelectedAddress, onAdd
       </p>
     </div>
 
-    <Button onClick={onAddAddress}>
+    <Button
+    className="h-14  w-30 text-sm " 
+    onClick={onAddAddress}>
       + Add Address
     </Button>
   </div>

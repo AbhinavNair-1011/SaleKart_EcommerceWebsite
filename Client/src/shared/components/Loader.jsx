@@ -1,7 +1,9 @@
 function Loader() {
   return (
-    <div className="flex justify-center py-10">
-      <p>Loading...</p>
+      <div className="space-y-3 animate-pulse max-w-lg ">
+        <div className="h-4 w-full rounded bg-gray-300"></div>
+        <div className="h-4 w-full rounded bg-gray-300"></div>
+        <div className="h-4 w-full rounded bg-gray-300"></div>
     </div>
   );
 }

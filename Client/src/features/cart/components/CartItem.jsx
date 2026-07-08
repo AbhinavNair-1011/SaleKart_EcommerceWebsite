@@ -2,14 +2,15 @@ import Button from "../../../shared/components/Button";
 
 function CartItem({ item, onIncrease, onDecrease, onRemove }) {
   const product = item.Product;
+  console.log(item)
 
   return (
-   <div className="flex items-center justify-between rounded-xl bg-white p-5 shadow-sm">
-  <div className="flex items-center gap-5">
+<div className="flex flex-col gap-5 rounded-xl bg-white p-4 shadow-sm md:flex-row md:items-center md:justify-between md:p-5">
+  <div className="flex gap-4 md:items-center md:gap-5">
     <img
       src={product.imageUrl}
       alt={product.name}
-      className="h-24 w-24 rounded-lg object-cover"
+      className="h-20 w-20 rounded-lg object-cover md:h-24 md:w-24"
     />
 
     <div>
@@ -17,11 +18,11 @@ function CartItem({ item, onIncrease, onDecrease, onRemove }) {
         {product.Category?.name}
       </span>
 
-      <h3 className="mt-3 text-lg font-semibold text-slate-900">
+      <h3 className="mt-3 text-base font-semibold text-slate-900 md:text-lg">
         {product.name}
       </h3>
 
-      <div className="mt-2 flex items-center gap-4 text-sm">
+      <div className="mt-2 flex flex-col gap-1 text-sm md:flex-row md:items-center md:gap-4">
         <span className="font-semibold text-slate-900">
           {product.price}
         </span>
@@ -33,13 +34,14 @@ function CartItem({ item, onIncrease, onDecrease, onRemove }) {
     </div>
   </div>
 
-  <div className="flex items-center gap-8">
+
+  <div className="flex items-end justify-between  gap-4 md:gap-8">
     <div className="flex items-center rounded-lg bg-slate-100 p-1">
       <button
         onClick={() => onDecrease(item)}
         className="flex h-8 w-8 items-center justify-center rounded-md text-lg font-semibold transition hover:bg-white"
       >
-      -
+        -
       </button>
 
       <span className="w-10 text-center text-sm font-semibold text-slate-900">
@@ -54,12 +56,13 @@ function CartItem({ item, onIncrease, onDecrease, onRemove }) {
       </button>
     </div>
 
-    <div className="min-w-[130px] text-right">
+
+    <div className="min-w-[100px] text-right md:min-w-[130px]">
       <p className="text-sm text-slate-400">
         Total
       </p>
 
-      <p className="mt-1 text-2xl font-bold text-slate-900">
+      <p className="mt-1 text-xl font-bold text-slate-900 md:text-2xl">
         {(Number(product.price) * item.quantity).toFixed(2)}
       </p>
 

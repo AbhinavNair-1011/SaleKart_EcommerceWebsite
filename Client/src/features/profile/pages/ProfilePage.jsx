@@ -116,6 +116,7 @@ function ProfilePage() {
           </div>
 
           <Button
+          className="text-sm"
             onClick={() => {
               setEditingAddress(null);
               setOpen(true);

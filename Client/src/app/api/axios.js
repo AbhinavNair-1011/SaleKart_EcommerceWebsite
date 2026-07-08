@@ -3,10 +3,11 @@ import axios from "axios";
 import queryClient from "../tanstack_query/queryClient";
 
 const api = axios.create({
-  baseURL: "http://localhost:4000",
+ baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 });
 
+console.log(import.meta.env.VITE_API_URL)
 api.interceptors.response.use(
   (response) => response,
 

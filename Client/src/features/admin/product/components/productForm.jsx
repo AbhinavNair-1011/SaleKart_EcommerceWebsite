@@ -66,9 +66,12 @@ function ProductForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-6">
+    <form
+      onSubmit={handleSubmit(handleFormSubmit)}
+      className="space-y-5 md:space-y-6"
+    >
       <div>
-        <h2 className="text-xl font-semibold text-slate-900">
+        <h2 className="text-lg font-semibold text-slate-900 md:text-xl">
           Product Information
         </h2>
 
@@ -91,7 +94,7 @@ function ProductForm({
         error={errors.description}
       />
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         <Input
           type="number"
           label="Price"
@@ -116,13 +119,13 @@ function ProductForm({
           <img
             src={defaultValues.imageUrl}
             alt={defaultValues.name}
-            className="h-32 w-32 rounded-lg object-cover"
+            className="h-24 w-24 rounded-lg object-cover sm:h-32 sm:w-32"
           />
         </div>
       )}
 
       <div className="grid gap-4 md:grid-cols-[2fr_1fr]">
-        <div>
+        <div className="min-w-0">
           <label className="mb-2 block text-sm font-medium">
             Product Image
           </label>
@@ -131,7 +134,7 @@ function ProductForm({
             type="file"
             accept="image/*"
             {...register("image")}
-            className="w-full rounded-lg border p-2"
+            className="w-full rounded-lg border p-2 text-sm file:max-w-full"
           />
 
           {errors.image && (
@@ -155,11 +158,11 @@ function ProductForm({
         </Select>
       </div>
 
-      <div className="flex justify-end border-t border-slate-100 pt-5">
+      <div className="flex border-t border-slate-100 pt-5 sm:justify-end">
         <Button
           type="submit"
           disabled={isPending}
-          className="min-w-45 bg-slate-900 hover:bg-slate-800"
+          className="w-full bg-slate-900 hover:bg-slate-800 sm:w-auto sm:min-w-45"
         >
           {isPending ? "Saving..." : buttonText}
         </Button>
