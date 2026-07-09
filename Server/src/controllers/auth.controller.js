@@ -89,7 +89,6 @@ async function register(req, res) {
       },
     );
 
-    await transaction.commit();
 
     await sendEmail({
       to: user.email,
@@ -99,6 +98,8 @@ async function register(req, res) {
       htmlContent: emailVerificationTemplate(otp),
     });
 
+    
+    await transaction.commit();
     return res.status(201).json({
       success: true,
 

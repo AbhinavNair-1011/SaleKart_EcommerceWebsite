@@ -40,7 +40,7 @@ function ProductCard({ product }) {
     <img
       src={product.imageUrl}
       alt={product.name}
-      className="h-48 w-full object-cover transition duration-500 group-hover:scale-105"
+      className="h-48 w-full object-contain transition duration-500 group-hover:scale-105"
     />
 
     <span className="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold text-slate-800 backdrop-blur">

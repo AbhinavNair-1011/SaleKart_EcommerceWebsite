@@ -47,7 +47,9 @@ function AdminProductPage() {
   });
 
   console.log(data);
-  const { data: categoryData } = useCategories();
+  const { data: categoryData } = useCategories({
+    limit:20
+  });
 
   const { mutate: createProduct, isPending: isCreating } = useCreateProduct();
 
