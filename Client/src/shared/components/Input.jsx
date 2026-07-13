@@ -4,6 +4,7 @@ function Input({
   type = "text",
   register,
   error,
+  labelClassName,
   className,
 
   ...props
@@ -12,7 +13,7 @@ function Input({
     <div className="flex flex-col gap-2">
       <label
         htmlFor={id}
-        className="font-medium "
+        className={`font-bold  text-black ${labelClassName}`}
       >
         {label}
       </label>
@@ -22,7 +23,7 @@ function Input({
         type={type}
         {...register}
         {...props}
-        className={`rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500 ${className}`}
+        className={`rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-blue-500 bg-white/80  text-black ${className}`}
       />
 
       {error && (

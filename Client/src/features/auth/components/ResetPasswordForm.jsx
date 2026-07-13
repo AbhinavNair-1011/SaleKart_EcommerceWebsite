@@ -102,7 +102,7 @@ function ResetPasswordForm({ email }) {
           {isResending ? "Sending..." : "Resend OTP"}
         </Button>
       </div>
-              <button className="underline cursor-pointer w-full " onClick={()=>{navigate("/login")}}> back to login </button>
+              <button className="underline cursor-pointer w-full text-blue-900 " onClick={()=>{navigate("/login")}}> back to login </button>
 
     </form>
     

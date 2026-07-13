@@ -19,33 +19,22 @@ function ForgotPasswordForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(
-      forgotPasswordSchema,
-    ),
+    resolver: zodResolver(forgotPasswordSchema),
   });
 
-  const {
-    mutate,
-    isPending,
-  } = useForgotPassword();
+  const { mutate, isPending } = useForgotPassword();
 
   function onSubmit(data) {
     mutate(data, {
       onSuccess(response) {
-        toast.success(
-          "OTP sent successfully.",
-        );
+        toast.success("OTP sent successfully.");
 
-        navigate(
-          `/reset-password?email=${response.data.email}`,
-        );
+        navigate(`/reset-password?email=${response.data.email}`);
       },
 
       onError(error) {
         toast.error(
-          error.response?.data?.error
-            ?.message ??
-            "Something went wrong.",
+          error.response?.data?.error?.message ?? "Something went wrong.",
         );
       },
     });
@@ -53,30 +42,31 @@ function ForgotPasswordForm() {
 
   return (
     <div className="">
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4"
-    >
-      <Input
-        id="email"
-        label="Email"
-        type="email"
-        register={register("email")}
-        error={errors.email}
-      />
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <Input
+          id="email"
+          label="Email"
+          type="email"
+          register={register("email")}
+          error={errors.email}
+          placeholder="you@example.com"
+        />
 
-<div className="flex justify-between ">
-      <Button
-        type="submit"
-        disabled={isPending}
-      >
-        {isPending
-          ? "Sending..."
-          : "Send OTP"}
-      </Button>
-    <button className="underline cursor-pointer " onClick={()=>{navigate("/login")}}> back to login </button>
-    </div>
-    </form>
+        <div className="flex justify-between ">
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Sending..." : "Send OTP"}
+          </Button>
+          <button
+            className=" cursor-pointer text-blue-900 text-bold "
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            {" "}
+            back to login{" "}
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

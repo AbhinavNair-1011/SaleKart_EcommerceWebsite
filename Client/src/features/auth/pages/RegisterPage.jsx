@@ -8,9 +8,9 @@ function RegisterPage() {
     <AuthCard title="Create your account">
       <RegisterForm />
 
-      <p className="mt-6 text-center text-sm text-white">
+      <p className="mt-6 text-center text-sm text-black">
         Already have an account?{" "}
-        <Link to="/login" className="font-medium text-white underline">
+        <Link to="/login" className="font-bold  text-blue-900 ">
           Login
         </Link>
       </p>

@@ -48,6 +48,7 @@ function RegisterForm() {
         label="Full Name"
         register={register("name")}
         error={errors.name}
+        placeholder="Name"
       />
 
       <Input
@@ -55,6 +56,7 @@ function RegisterForm() {
         label="Username"
         register={register("userName")}
         error={errors.userName}
+        placeholder="Username"
       />
 
       <Input
@@ -63,6 +65,7 @@ function RegisterForm() {
         label="Email"
         register={register("email")}
         error={errors.email}
+        placeholder="you@gmail.com"
       />
 
       <Input
@@ -71,6 +74,7 @@ function RegisterForm() {
         label="Password"
         register={register("password")}
         error={errors.password}
+        placeholder="Password"
       />
 
       <Input

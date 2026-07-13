@@ -65,6 +65,7 @@ function LoginForm() {
         type="email"
         register={register("email")}
         error={errors.email}
+        placeholder="you@example.com"
       />
 
       <Input
@@ -73,12 +74,14 @@ function LoginForm() {
         type="password"
         register={register("password")}
         error={errors.password}
+        placeholder="Password"
+
       />
       <p className="text-right">
         <button
           type="button"
           onClick={() => navigate("/forgot-password")}
-          className="text-sm text-white underline"
+          className="text-sm text-blue-900 font-bold underline"
         >
           Forgot Password?
         </button>
